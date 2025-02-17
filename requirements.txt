@@ -1,1 +1,4 @@
+
+setuptools~=75.8.0
 pyutile~=0.1.0
+pyutil~=0.1.0
