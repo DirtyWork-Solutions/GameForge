@@ -12,7 +12,7 @@ URL = 'https://github.com/DirtyWork-Solutions/GameForge'
 EMAIL = 'gameforged@open.dirtywork.solutions'
 AUTHOR = 'DirtyWork Solutions Limited'
 REQUIRES_PYTHON = '>=3.13.0'
-VERSION = '0.1.0'
+VERSION = '0.1.1'
 
 # What packages are required for this module to be executed?
 REQUIRED = ['pydantic', 'pandas', 'click'

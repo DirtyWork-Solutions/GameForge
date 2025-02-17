@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gameforged"
-version = "0.1.0"
+version = "0.1.1"
 description = "A comprehensive Python framework for game theory modeling, analysis, and simulation."
 authors = [{name = "DirtyWork Solutions Limited", email = "gameforge@open.dirtywork.solutions"}]
 license = {file = "LICENSE.md"}
@@ -15,7 +15,8 @@ dependencies = [
     "pandas",
     "scikit-learn",
     "numpy",
-    "scipy"
+    "scipy",
+    "pyutile"
 
 ]
 
