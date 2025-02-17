@@ -3,7 +3,7 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "gameforge"
+name = "gameforged"
 version = "0.1.0"
 description = "A comprehensive Python framework for game theory modeling, analysis, and simulation."
 authors = [{name = "DirtyWork Solutions Limited", email = "gameforge@open.dirtywork.solutions"}]
@@ -20,7 +20,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://open.dirtywork.solutions/gameforge"
-Documentation = "https://open.dirtywork.solutions/gameforge/docs"
+Homepage = "https://open.dirtywork.solutions/gameforgde"
+Documentation = "https://open.dirtywork.solutions/gameforged/docs"
 Source = "https://github.com/DirtyWork-Solutions/GameForge"
 Issues = "https://github.com/DirtyWork-Solutions/GameForge/tree/main/.github/ISSUE_TEMPLATE"

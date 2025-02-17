@@ -6,16 +6,16 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = 'gameforge'
+NAME = 'gameforged'
 DESCRIPTION = 'A comprehensive Python framework for game theory modeling, analysis, and simulation.'
 URL = 'https://github.com/DirtyWork-Solutions/GameForge'
-EMAIL = 'gameforge@open.dirtywork.solutions'
+EMAIL = 'gameforged@open.dirtywork.solutions'
 AUTHOR = 'DirtyWork Solutions Limited'
 REQUIRES_PYTHON = '>=3.13.0'
 VERSION = '0.1.0'
 
 # What packages are required for this module to be executed?
-REQUIRED = [
+REQUIRED = ['pydantic', 'pandas', 'click'
     # 'requests', 'maya', 'records',
 ]
 
