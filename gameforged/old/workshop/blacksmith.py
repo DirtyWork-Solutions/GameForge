@@ -1,4 +1,4 @@
-from src.gameforged.gaming import classical
+from gameforged.old.gaming import classical
 
 test = classical.ClassicalGame()
 
