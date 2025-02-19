@@ -1,1 +1,1 @@
-from gameforged.mechanics.__bases__ import BaseStrategy
+from gameforged.mechanics.__bases__ import BaseStrategy, BaseAction

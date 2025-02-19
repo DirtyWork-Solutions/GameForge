@@ -1,20 +1,30 @@
 from abc import ABC
 
+"""
+Base classes for game mechanic components
+"""
 
-class BaseAgent(ABC):
+class GameTheoryMechanic(ABC):
     pass
 
-class BaseGame(ABC):
+class BaseAgent(GameTheoryMechanic, ABC):
+    pass
+
+class BaseGame(GameTheoryMechanic, ABC):
+    pass
+
+class BasePayoff(GameTheoryMechanic, ABC):
     pass
 
 
-class BasePayoff:
+class BaseStrategy(GameTheoryMechanic, ABC):
     pass
 
-
-class BaseStrategy:
+class BaseAction(GameTheoryMechanic, ABC):
     pass
 
+class BaseInformation(GameTheoryMechanic, ABC):
+    pass
 
-class BaseInformation:
+class BaseTurn(GameTheoryMechanic, ABC):
     pass
