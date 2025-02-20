@@ -1,8 +1,8 @@
-from abc import ABC
-
 """
 Base classes for game mechanic components
 """
+
+from abc import ABC
 
 class GameTheoryMechanic(ABC):
     pass
