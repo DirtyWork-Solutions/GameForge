@@ -16,7 +16,7 @@ class GameTheoryMechanic(ABC):
 
 class BaseAgent(GameTheoryMechanic, ABC):
     """
-    Abstract base class for
+    Abstract base class for decision-makers in a game.
     """
     @abstractmethod
     def __init__(self):
@@ -27,7 +27,7 @@ class BaseAgent(GameTheoryMechanic, ABC):
 
 class BaseGame(GameTheoryMechanic, ABC):
     """
-    Abstract base class for
+    An *abstract base class* for game; a Structured interaction involving players making strategic decisions.
     """
     @abstractmethod
     def __init__(self):
@@ -36,6 +36,9 @@ class BaseGame(GameTheoryMechanic, ABC):
 
 
 class BasePayoff(GameTheoryMechanic, ABC):
+    """
+    Quantification of outcomes based on players' actions.
+    """
     @abstractmethod
     def __init__(self):
         super().__init__()
@@ -43,6 +46,7 @@ class BasePayoff(GameTheoryMechanic, ABC):
 
 
 class BaseStrategy(GameTheoryMechanic, ABC):
+
     @abstractmethod
     def __init__(self):
         super().__init__()
