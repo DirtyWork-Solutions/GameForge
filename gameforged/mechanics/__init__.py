@@ -1,3 +1,2 @@
 """
-mechanics & execution
 """

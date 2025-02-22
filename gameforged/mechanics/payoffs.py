@@ -5,7 +5,7 @@ including deterministic, probabilistic, and adaptive payoffs.
 
 **Key Components:**
 
-- Payoff (Abstract Base Class):  *Defines the general structure for payoff calculation.*
+- BasePayoff (Abstract Base Class):  *Defines the general structure for payoff calculation.*
 - DeterministicPayoff:  *Fixed reward distribution based on a payoff matrix.*
 - ProbabilisticPayoff:  *Payoffs influenced by probability distributions.*
 - EvolutionaryPayoff:  *Payoffs that change over time based on player actions.*
@@ -24,3 +24,7 @@ Payoff types can be customized based on game design requirements.
 """
 
 from gameforged.mechanics.__bases__ import BasePayoff
+
+
+class PayOffMatrix:
+    pass

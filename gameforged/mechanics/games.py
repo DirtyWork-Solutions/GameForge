@@ -1,5 +1,3 @@
-from gameforged.mechanics.__bases__ import BaseGame
-
 """
 This module defines the fundamental structure of a game, including different 
 types of games (e.g., sequential, simultaneous, adaptive) and their state management. 
@@ -21,3 +19,4 @@ This module serves as the foundation for defining different game structures
 and should be used as a base when implementing specific game mechanics.
 """
 
+from gameforged.mechanics.__bases__ import BaseGame

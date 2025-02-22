@@ -1,4 +1,3 @@
-from gameforged.mechanics.__bases__ import BaseInformation
 """
 This module defines how information is shared, hidden, or distorted 
 among players in a game.
@@ -19,3 +18,5 @@ among players in a game.
 Use this module to define how much information is visible to each player. 
 It is especially useful for games with hidden roles or incomplete knowledge.
 """
+
+from gameforged.mechanics.__bases__ import BaseInformation
