@@ -29,3 +29,52 @@ Developers can extend strategies or integrate them with reinforcement learning m
 """
 
 from gameforged.mechanics.__bases__ import BaseStrategy, BaseAction
+
+
+class PureStrategy(BaseStrategy):
+    """
+    A static strategy where a player always makes the same move.
+    """
+
+    def __init__(self):
+        super().__init__()
+
+
+
+class MixedStrategy(BaseStrategy):
+    """
+    A probabilistic strategy where players choose moves based on weighted probabilities.
+    """
+
+    def __init__(self):
+        super().__init__()
+
+
+
+class AdaptiveStrategy(BaseStrategy):
+    """
+    A learning-based strategy that evolves over time.
+    """
+
+    def __init__(self):
+        super().__init__()
+
+
+
+class DeceptiveStrategy(BaseStrategy):
+    """
+    A strategy that incorporates bluffing and misdirection.
+    """
+
+    def __init__(self):
+        super().__init__()
+
+
+
+class GraphDecisionStrategy(BaseStrategy):
+    """
+    A strategy based on decision trees or game graphs.
+    """
+
+    def __init__(self):
+        super().__init__()

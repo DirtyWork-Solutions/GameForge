@@ -5,7 +5,6 @@ and negotiation-based players.
 
 **Key Components:**
 
-- Player
 - BaseAgent (Abstract Base Class): Defines common attributes and methods for players.
 - HumanPlayer: A player controlled by human input.
 - AIPlayer: A player controlled by an AI strategy.
@@ -24,9 +23,31 @@ and negotiation-based players.
 This module should be used to define players in a game and assign them roles, strategies, 
 and decision-making mechanisms. AI players can integrate with the strategies' module.
 """
+from abc import ABC
 
 from gameforged.mechanics.__bases__ import BaseAgent
 
 
-class Player(BaseAgent):
-    pass
+class HumanPlayer(BaseAgent):
+    """
+
+    """
+    def __init__(self):
+        super().__init__()
+
+
+class AIPlayer(BaseAgent):
+    """
+
+    """
+    def __init__(self):
+        super().__init__()
+
+
+class NegotiationPlayer(BaseAgent):
+    """
+    Mix-in class?
+    """
+
+    def __init__(self):
+        super().__init__()
