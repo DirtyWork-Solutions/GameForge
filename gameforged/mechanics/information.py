@@ -27,3 +27,18 @@ It is especially useful for games with hidden roles or incomplete knowledge.
 """
 
 from gameforged.mechanics.__bases__ import BaseInformation
+
+class PerfectInformation(BaseInformation):
+    pass
+
+
+class ImperfectInformation(BaseInformation):
+    pass
+
+
+class AsymmetricInformation(BaseInformation):
+    pass
+
+
+class MisinformationMechanic(BaseInformation):
+    pass
