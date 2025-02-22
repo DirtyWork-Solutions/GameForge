@@ -1,5 +1,5 @@
 """
-Base classes for game mechanic components
+This module provides Base Classes for *all* **game theory** mechanics; such as *players* or *strategies*.
 """
 
 from abc import ABC, abstractmethod

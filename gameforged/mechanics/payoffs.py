@@ -18,7 +18,10 @@ including deterministic, probabilistic, and adaptive payoffs.
 - Enables modeling of evolving payoffs influenced by past moves.
 - Provides utility functions for expected value calculations.
 
+
+
 **Usage:**
+
 This module is used for defining the reward structures in a game. 
 Payoff types can be customized based on game design requirements.
 """
