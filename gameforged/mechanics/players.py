@@ -5,7 +5,8 @@ and negotiation-based players.
 
 **Key Components:**
 
-- Player (Abstract Base Class): Defines common attributes and methods for players.
+- Player
+- BaseAgent (Abstract Base Class): Defines common attributes and methods for players.
 - HumanPlayer: A player controlled by human input.
 - AIPlayer: A player controlled by an AI strategy.
 - NegotiationPlayer: A player with additional interaction mechanisms such as trade and alliances.
