@@ -19,7 +19,6 @@ including deterministic, probabilistic, and adaptive payoffs.
 - Provides utility functions for expected value calculations.
 
 
-
 **Usage:**
 
 This module is used for defining the reward structures in a game. 

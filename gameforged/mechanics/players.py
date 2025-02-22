@@ -28,6 +28,18 @@ from abc import ABC
 from gameforged.mechanics.__bases__ import BaseAgent
 
 
+class SimulatedAgent(BaseAgent):
+    """
+    Mixin
+    """
+    def __init__(self):
+        super().__init__()
+        self._is_simulated = True
+
+    @property
+    def is_simulated(self) -> bool:
+        return self._is_simulated
+
 class HumanPlayer(BaseAgent):
     """
 
@@ -36,7 +48,7 @@ class HumanPlayer(BaseAgent):
         super().__init__()
 
 
-class AIPlayer(BaseAgent):
+class AIPlayer(BaseAgent, SimulatedAgent):
     """
 
     """
@@ -51,3 +63,4 @@ class NegotiationPlayer(BaseAgent):
 
     def __init__(self):
         super().__init__()
+

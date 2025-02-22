@@ -26,3 +26,15 @@ implementing specific game mechanics.
 """
 
 from gameforged.mechanics.__bases__ import BaseGame
+
+class SequentialGame(BaseGame):
+    pass
+
+class SimultaneousGame(BaseGame):
+    pass
+
+class AdaptiveGame(BaseGame):
+    pass
+
+class GameState:
+    pass
