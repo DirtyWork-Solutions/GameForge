@@ -25,8 +25,17 @@ This module is used for defining the reward structures in a game.
 Payoff types can be customized based on game design requirements.
 """
 
+from typing import Dict, Tuple
+
 from gameforged.mechanics.__bases__ import BasePayoff
 
 
 class PayOffMatrix:
-    pass
+    """Encapsulates payoffs as a matrix for extensibility."""
+
+    def __init__(self, matrix: Dict[Tuple, Tuple]):
+        self.matrix = matrix
+
+    def get_payoff(self, strategies: Tuple):
+        """Retrieves payoffs for a given strategy profile."""
+        return self.matrix.get(strategies, (0, 0))
