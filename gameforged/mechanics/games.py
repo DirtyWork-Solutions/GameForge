@@ -25,7 +25,7 @@ This module serves as the foundation for defining different game structures and 
 implementing specific game mechanics.
 """
 
-from gameforged.mechanics.__bases__ import BaseGame
+from gameforged.mechanics.__bases__ import BaseGame, BaseTurn
 
 class SequentialGame(BaseGame):
     pass
