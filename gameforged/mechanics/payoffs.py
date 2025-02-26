@@ -31,7 +31,7 @@ from gameforged.mechanics.__bases__ import BasePayoff
 from gameforged.control_tower import log
 
 
-class PayOffMatrix:
+class PayOffMatrix(BasePayoff):
     """Encapsulates payoffs as a matrix for extensibility."""
 
     def __init__(self, matrix: Dict[Tuple, Tuple]):
