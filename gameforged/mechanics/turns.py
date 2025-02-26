@@ -26,3 +26,4 @@ The TurnManager can be used to orchestrate different types of turn-based logic.
 """
 
 from gameforged.mechanics.__bases__ import BaseTurn
+from gameforged.control_tower import log

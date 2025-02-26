@@ -27,6 +27,9 @@ It is especially useful for games with hidden roles or incomplete knowledge.
 """
 
 from gameforged.mechanics.__bases__ import BaseInformation
+from gameforged.control_tower import log
+
+
 
 class PerfectInformation(BaseInformation):
     pass
