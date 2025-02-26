@@ -3,7 +3,7 @@ This module provides Base Classes for *all* **game theory** mechanics; such as *
 """
 
 from abc import ABC, abstractmethod
-from gameforged.control_tower import log
+from gameforged.control_tower import LOG as log
 
 
 class GameTheoryMechanic(ABC):

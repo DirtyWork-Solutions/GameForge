@@ -28,7 +28,7 @@ Payoff types can be customized based on game design requirements.
 from typing import Dict, Tuple
 
 from gameforged.mechanics.__bases__ import BasePayoff
-from gameforged.control_tower import log
+from gameforged.control_tower import LOG as log
 
 
 class PayOffMatrix(BasePayoff):
