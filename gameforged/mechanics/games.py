@@ -26,7 +26,7 @@ implementing specific game mechanics.
 """
 
 from gameforged.mechanics.__bases__ import BaseGame, BaseTurn
-from gameforged.control_tower import log
+from gameforged.control_tower import LOG as log
 
 class SequentialGame(BaseGame):
     """
@@ -67,7 +67,7 @@ class GameState:
 
 class Game:
     def __init__(self):
-        self._game = None
+        self._game: BaseGame | None = None
 
     def create_game(self, game_type: str):
         if game_type == "sequential":
