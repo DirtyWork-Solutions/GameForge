@@ -26,24 +26,46 @@ and decision-making mechanisms. AI players can integrate with the strategies' mo
 from abc import ABC
 
 from gameforged.mechanics.__bases__ import BaseAgent
-from gameforged.control_tower import log
+from gameforged.control_tower import LOG as log
 
 
 class SimulatedAgent(BaseAgent):
     """
-    Mixin
+    Mix-in class for agents that are simulated by the game engine.
+
+
     """
     def __init__(self):
         super().__init__()
+        self.simulation_state = None
         self._is_simulated = True
 
     @property
     def is_simulated(self) -> bool:
         return self._is_simulated
 
+
+
+    def start_simulation(self):
+        self.simulation_state = 'running'
+        log.info(f"Simulation started with speed {self.simulation_speed} and accuracy {self.simulation_accuracy}")
+
+    def pause_simulation(self):
+        self.simulation_state = 'paused'
+        log.info("Simulation paused")
+
+    def stop_simulation(self):
+        self.simulation_state = 'stopped'
+        log.info("Simulation stopped")
+
+    def update_simulation(self):
+        if self.simulation_state == 'running':
+            # Update the simulation state here
+            log.info("Simulation updated")
+
 class HumanPlayer(BaseAgent):
     """
-
+    A Player representing a human-controlled agent.
     """
     def __init__(self):
         super().__init__()
@@ -51,7 +73,7 @@ class HumanPlayer(BaseAgent):
 
 class AIPlayer(BaseAgent, SimulatedAgent):
     """
-
+    A Player representing an AI-controlled agent.
     """
     def __init__(self):
         super().__init__()

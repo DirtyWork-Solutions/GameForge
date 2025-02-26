@@ -29,13 +29,67 @@ from gameforged.mechanics.__bases__ import BaseGame, BaseTurn
 from gameforged.control_tower import log
 
 class SequentialGame(BaseGame):
-    pass
+    """
+    A turn-based game with players acting in a fixed order.
+    """
+    def __init__(self):
+        super().__init__()
+        log.debug("Sequential Game Initialized")
+
 
 class SimultaneousGame(BaseGame):
-    pass
+    """
+
+    """
+
+    def __init__(self):
+        super().__init__()
+        log.debug("Simultaneous Game Initialized")
 
 class AdaptiveGame(BaseGame):
-    pass
+    """
+    A game where all players act simultaneously.
+    """
+
+    def __init__(self):
+        super().__init__()
+        log.debug("Adaptive Game Initialized")
 
 class GameState:
-    pass
+    """
+
+    """
+
+    def __init__(self):
+        super().__init__()
+        log.debug("Game State Initialized")
+
+
+class Game:
+    def __init__(self):
+        self._game = None
+
+    def create_game(self, game_type: str):
+        if game_type == "sequential":
+            self._game = SequentialGame()
+        elif game_type == "simultaneous":
+            self._game = SimultaneousGame()
+        elif game_type == "adaptive":
+            self._game = AdaptiveGame()
+        else:
+            log.error("Invalid game type. Please choose from 'sequential', 'simultaneous', or 'adaptive'.")
+
+    def start_game(self):
+        if self._game:
+            try:
+                self._game.start()
+            except Exception as e:
+                log.error(f"Error starting game: {e}")
+        else:
+            log.error("No game created. Please call create_game() first.")
+
+    def end_game(self):
+        if self._game:
+            self._game.end()
+        else:
+            log.error("No game created. Please call create_game() first.")
