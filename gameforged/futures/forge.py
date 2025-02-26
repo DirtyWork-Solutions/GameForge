@@ -8,3 +8,6 @@ Including:
 - PyThings
 """
 
+import pyutile
+import pyextendable
+import pythingd
