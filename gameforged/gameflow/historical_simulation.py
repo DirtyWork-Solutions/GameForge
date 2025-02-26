@@ -2,6 +2,7 @@
 Provides tools to simulate historical scenarios and incorporate real-world data trends into game dynamics. Useful for
 running “what-if” analyses and comparing simulated outcomes with historical benchmarks.
 """
+from gameforged.control_tower import LOG as log
 
 
 class SimulationResult:

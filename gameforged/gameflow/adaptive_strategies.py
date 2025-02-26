@@ -7,6 +7,7 @@ recalculates optimal moves or adjustments when external shocks occur.
 from abc import ABC, abstractmethod
 
 from gameforged.mechanics.strategies import BaseStrategy
+from gameforged.control_tower import LOG as log
 
 
 class AdaptiveStrategyManager:

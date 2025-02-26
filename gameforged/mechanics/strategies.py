@@ -29,7 +29,7 @@ Developers can extend strategies or integrate them with reinforcement learning m
 """
 
 from gameforged.mechanics.__bases__ import BaseStrategy, BaseAction
-from gameforged.control_tower import log
+from gameforged.control_tower import LOG as log
 
 
 class PureStrategy(BaseStrategy):

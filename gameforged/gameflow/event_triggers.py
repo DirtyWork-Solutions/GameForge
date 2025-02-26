@@ -3,6 +3,7 @@ Handles the detection, scheduling, and execution of game-changing events such as
 external shocks. These events serve as catalysts that force players and AI agents to re-evaluate strategies.
 """
 from abc import ABC, abstractmethod
+from gameforged.control_tower import LOG as log
 
 
 class BaseEventTrigger(ABC):
