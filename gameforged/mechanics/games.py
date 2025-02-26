@@ -26,6 +26,7 @@ implementing specific game mechanics.
 """
 
 from gameforged.mechanics.__bases__ import BaseGame, BaseTurn
+from gameforged.control_tower import log
 
 class SequentialGame(BaseGame):
     pass
