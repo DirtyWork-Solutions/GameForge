@@ -5,6 +5,7 @@
 
 from pyutile.reporting.logged import log as LOG
 from gameforged.utilities.interfaces import Interfaces
+from gameforged.utilities.data_io import save_data, load_data
 from gameforged.errors import *
 
 # Singleton instance of the Interfaces class
