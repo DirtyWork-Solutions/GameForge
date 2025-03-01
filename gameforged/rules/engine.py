@@ -1,3 +1,6 @@
+# TODO: document engine module
+
+
 class RuleEngine:
     def __init__(self):
         self.rules = {}

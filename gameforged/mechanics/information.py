@@ -158,17 +158,17 @@ class InformationManager:
 
 # ----------------------------------------------------
 
-class PerfectInformation(BaseInformation):
+class PerfectInformation(BaseInformation):  # TODO: Create PerfectInformation class
     pass
 
 
-class ImperfectInformation(BaseInformation):
+class ImperfectInformation(BaseInformation):  # TODO: Create ImperfectInformation class
     pass
 
 
-class AsymmetricInformation(BaseInformation):
+class AsymmetricInformation(BaseInformation):  # TODO: Create AsymmetricInformation class
     pass
 
 
-class MisinformationMechanic(BaseInformation):
+class MisinformationMechanic(BaseInformation):  # TODO: Create Misinformation class
     pass

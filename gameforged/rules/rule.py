@@ -1,3 +1,7 @@
+# TODO: document rule module
+
+# TODO: create rule module
+
 class Rule:
     def __init__(self, id, description, condition, scope, priority, mutable=True):
         self.id = id

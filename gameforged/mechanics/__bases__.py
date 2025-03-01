@@ -60,7 +60,7 @@ class BasePayoff(GameTheoryMechanic, ABC):
         super().__init__()
 
 
-class BaseStrategy(GameTheoryMechanic, ABC):
+class BaseStrategy(GameTheoryMechanic, ABC):  # TODO: document strategy base class
     """
 
     """

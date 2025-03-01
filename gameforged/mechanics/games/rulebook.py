@@ -1,3 +1,5 @@
+# TODO: document module
+
 from gameforged.rules.engine import RuleEngine
 
 
