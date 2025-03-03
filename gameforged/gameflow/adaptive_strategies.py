@@ -14,7 +14,9 @@ class AdaptiveStrategyManager:
     """
     Central manager for adapting strategies across players/agents.
     """
-    pass
+    def __init__(self):
+        log.debug("Adaptive strategy manager initialized.")
+
 
 class BaseStrategyAdjuster(ABC):
     """

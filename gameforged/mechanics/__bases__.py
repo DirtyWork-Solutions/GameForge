@@ -3,6 +3,8 @@ This module provides Base Classes for *all* **game theory** mechanics; such as *
 """
 
 from abc import ABC, abstractmethod
+from uuid import uuid4, UUID
+
 from gameforged.control_tower import LOG as log
 
 
@@ -36,12 +38,61 @@ class BaseGame(GameTheoryMechanic, ABC):
     mechanic_desc = 'a structured interaction involving players making strategic decisions.'
 
     @abstractmethod
-    def __init__(self):
+    def __init__(self, name, uid, rulebook):
         """
         Initialize the 'game' mechanics.
         """
         super().__init__()
+        self._game_id = uid
+        self._label = name
+        self.rulebook = rulebook
         self._players = []
+        self.turn_number = 0
+        self.state = {}
+        self.history = []
+        self.started = False
+        self.ended = False
+
+    @property
+    def current_turn(self):
+        if self.history:
+            return self.history[-1]
+        return None
+
+    @property
+    def active_players(self):
+        return [p for p in self.players if p.status == 'active']
+
+    def start_game(self):
+        self.started = True
+        self.turn_number = 1
+        self._init_game_state()
+
+    def end_game(self):
+        self.ended = True
+
+    def advance_turn(self):
+        self.turn_number += 1
+
+    def add_player(self, player):
+        self.players.append(player)
+
+    def log_action(self, player_id, action, result):
+        self.history.append(
+            {
+            'turn': self.turn_number,
+            'player': player_id,
+            'action': action,
+            'result': result
+            }
+        )
+
+    @abstractmethod
+    def get_winner(self):
+        pass  # Game-specific
+
+    def _init_game_state(self):
+        self.state = {}  # Can be overridden by subclasses
 
     @property
     def players(self):
@@ -62,14 +113,74 @@ class BasePayoff(GameTheoryMechanic, ABC):
 
 class BaseStrategy(GameTheoryMechanic, ABC):  # TODO: document strategy base class
     """
+    Abstract base class for strategies used by players in a game.
+
 
     """
 
     mechanic_name = 'strategies'
+    mechanic_desc = ''
 
     @abstractmethod
-    def __init__(self):
+    def __init__(self, name: str | None = 'new strategy', uid: str | UUID | None = None):
+        """
+
+        :param name:
+        :param uid:
+        """
         super().__init__()
+        self._label: str = 'new strategy'
+        self._uid = str(uuid4())
+        self._stype = 'unknown'
+        if uid:
+            self.set_id(uid)
+
+        if name:
+            self.set_name(name)
+        else:
+            self.set_name('new strategy')
+
+        log.debug(f"Strategy initialized: '{self._label}'  ({self._uid})")
+
+
+
+
+    @property
+    def strategy_id(self) -> UUID | str:
+        return self._uid
+
+    def set_id(self, uid: str | UUID | None):
+        """
+        Set the unique identifier for the strategy.
+        :param uid:
+        :return: nothing
+        """
+        if isinstance(uid, str):
+            self._uid = UUID(uid)
+            log.success(f"Strategy ID set to: {self._uid}")
+        elif isinstance(uid, UUID):
+            self._uid = uid
+            log.success(f"Strategy ID set to: {self._uid}")
+        elif uid is None:
+            log.debug("No ID provided. Generating a new one.")
+            self._uid = uuid4()
+            log.success(f"Strategy ID set to: {self._uid}")
+        else:  # TODO: Catch & Handle invalid UID type issue
+            log.error(f"Invalid UID type: {type(uid)}")
+
+
+    @property
+    def name(self) -> str:
+        return self._label
+
+    def set_name(self, label: str):
+        """
+        Set the name of the strategy.
+        :param label:
+        :return: nothing
+        """
+        self._label = label
+        log.success(f"Strategy name set to: {self._label}")
 
 
 class BaseAction(GameTheoryMechanic, ABC):
