@@ -3,6 +3,7 @@ This module provides Base Classes for *all* **game theory** mechanics; such as *
 """
 
 from abc import ABC, abstractmethod
+from typing import Dict, Any
 from uuid import uuid4, UUID
 
 from pydantic import UUID4
@@ -210,7 +211,18 @@ class BaseInformation(GameTheoryMechanic, ABC):  # TODO: add hooks to this class
     @abstractmethod
     def __init__(self):
         super().__init__()
+        self.global_information: Dict[str, Dict[str, Any]] = {}
+        self.player_information: Dict[str, Dict[str, Dict[str, Any]]] = {}
 
+    @abstractmethod
+    def get_information(self):
+        pass
+
+    def get_all_information(self):
+        return {
+            "global": self.global_information,
+            "players": self.player_information
+        }
 
 class BaseTurn(GameTheoryMechanic, ABC):  # TODO: add hooks to this class
     """

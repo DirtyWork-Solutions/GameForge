@@ -96,8 +96,8 @@ class InformationManager:
         self.player_information.get(player_id, {}).get(layer, {}).pop(key, None)
 
     # ===== Meta Information Handling =====
-
-    def _wrap_meta_information(self, value: Any, source: Optional[str], authenticity: Optional[str]) -> Dict[str, Any]:
+    @staticmethod
+    def _wrap_meta_information(value: Any, source: Optional[str], authenticity: Optional[str]) -> Dict[str, Any]:
         return {
             "value": value,
             "source": source or "system",
@@ -159,16 +159,44 @@ class InformationManager:
 # ----------------------------------------------------
 
 class PerfectInformation(BaseInformation):  # TODO: Create PerfectInformation class
-    pass
+    def __init__(self):
+        super().__init__()
+
+    def get_information(self, player_id: str, layer: str) -> Dict[str, Any]:
+        return self.global_information.get(layer, {}).copy()
 
 
 class ImperfectInformation(BaseInformation):  # TODO: Create ImperfectInformation class
-    pass
+    def __init__(self):
+        super().__init__()
 
+    def get_information(self, player_id: str, layer: str) -> Dict[str, Any]:
+        return self.player_information.get(player_id, {}).get(layer, {}).copy()
 
 class AsymmetricInformation(BaseInformation):  # TODO: Create AsymmetricInformation class
-    pass
+    def __init__(self):
+        super().__init__()
 
+    def get_information(self, player_id: str, layer: str) -> Dict[str, Any]:
+        info = self.global_information.get(layer, {}).copy()
+        player_info = self.player_information.get(player_id, {}).get(layer, {}).copy()
+        info.update(player_info)
+        return info
 
 class MisinformationMechanic(BaseInformation):  # TODO: Create Misinformation class
-    pass
+    def __init__(self):
+        super().__init__()
+
+    def get_information(self, player_id: str, layer: str) -> Dict[str, Any]:
+        info = self.player_information.get(player_id, {}).get(layer, {}).copy()
+        for key, value in info.items():
+            if value.get("authenticity") == "false":
+                info[key] = self._distort_information(value)
+        return info
+
+    def _distort_information(self, value: Dict[str, Any]) -> Dict[str, Any]:
+        # TODO: Implement distortion logic here
+        log.error("Information Distortion Not Yet Implemented")
+        distorted_value = value.copy()
+        distorted_value["value"] = "distorted_" + str(value["value"])
+        return distorted_value
