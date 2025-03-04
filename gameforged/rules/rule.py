@@ -4,6 +4,7 @@
 
 class Rule:
     def __init__(self, id, description, condition, scope, priority, mutable=True):
+        # Presets
         self.id = id
         self.description = description
         self.condition = condition # Callable that evaluates the rule
