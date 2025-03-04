@@ -1,16 +1,11 @@
-"""
-Module Docstring:
-Manages dynamic adaptation of strategies by AI and human players in response to changing game conditions. This module
-recalculates optimal moves or adjustments when external shocks occur.
-"""
-
 from abc import ABC, abstractmethod
 
-from gameforged.mechanics.strategies import BaseStrategy
-from gameforged.control_tower import LOG as log
+from pyutile.reporting.logged import log as log
+
+from gameforged.mechanics.__bases__ import BaseStrategy
 
 
-class AdaptiveStrategyManager:
+class AdaptiveStrategyManager:  # TODO: Create this manager
     """
     Central manager for adapting strategies across players/agents.
     """
@@ -32,11 +27,13 @@ class BaseStrategyAdjuster(ABC):
         """
         pass
 
+
 class EconomicStrategyAdjuster(BaseStrategyAdjuster):
     """
     Implements adjustments for economic decisions.
     """
     pass
+
 
 class PoliticalStrategyAdjuster(BaseStrategyAdjuster):
     """
