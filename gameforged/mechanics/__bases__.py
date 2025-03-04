@@ -5,6 +5,8 @@ This module provides Base Classes for *all* **game theory** mechanics; such as *
 from abc import ABC, abstractmethod
 from uuid import uuid4, UUID
 
+from pydantic import UUID4
+
 from gameforged.control_tower import LOG as log
 
 
@@ -12,10 +14,48 @@ class GameTheoryMechanic(ABC):
     """
     Identifying base class for a mechanics of game theory (e.g. *players* or *strategies*)
     """
-
+    mechanic_name = 'game theory'
     @abstractmethod
     def __init__(self):
-        self.mechanic_name = 'game theory'
+        self._uid = uuid4()
+        self._label: str = ''
+
+    @property
+    def identifier(self):
+        return self._uid
+
+    def set_id(self, uid: str | UUID | UUID4 | None):
+        """
+        Set the unique identifier for the instance.
+
+        :param uid: string or UUID
+        :return: nothing
+        """
+        if isinstance(uid, str):
+            self._uid = UUID(uid)
+            log.success(f"{self.mechanic_name.capitalize()} ID set to: {self._uid}")
+        elif isinstance(uid, UUID):
+            self._uid = uid
+            log.success(f"{self.mechanic_name.capitalize()} ID set to: {self._uid}")
+        elif uid is None:
+            log.warning("No ID provided. Generating a new one.")
+            self._uid = uuid4()
+            log.success(f"{self.mechanic_name.capitalize()} ID set to: {self._uid}")
+        else:  # TODO: Catch & Handle invalid UID type issue
+            log.error(f"Invalid UID type: {type(uid)}")
+
+    @property
+    def name(self) -> str:
+        return self._label
+
+    def set_name(self, label: str):
+        """
+        Set the name of the strategy.
+        :param label:
+        :return: nothing
+        """
+        self._label = label
+        log.success(f"{self.mechanic_name.capitalize()} name set to: {self._label}")
 
 class BaseAgent(GameTheoryMechanic, ABC):
     """
@@ -114,8 +154,6 @@ class BasePayoff(GameTheoryMechanic, ABC):
 class BaseStrategy(GameTheoryMechanic, ABC):  # TODO: document strategy base class
     """
     Abstract base class for strategies used by players in a game.
-
-
     """
 
     mechanic_name = 'strategies'
@@ -149,41 +187,9 @@ class BaseStrategy(GameTheoryMechanic, ABC):  # TODO: document strategy base cla
     def strategy_id(self) -> UUID | str:
         return self._uid
 
-    def set_id(self, uid: str | UUID | None):
-        """
-        Set the unique identifier for the strategy.
-        :param uid:
-        :return: nothing
-        """
-        if isinstance(uid, str):
-            self._uid = UUID(uid)
-            log.success(f"Strategy ID set to: {self._uid}")
-        elif isinstance(uid, UUID):
-            self._uid = uid
-            log.success(f"Strategy ID set to: {self._uid}")
-        elif uid is None:
-            log.debug("No ID provided. Generating a new one.")
-            self._uid = uuid4()
-            log.success(f"Strategy ID set to: {self._uid}")
-        else:  # TODO: Catch & Handle invalid UID type issue
-            log.error(f"Invalid UID type: {type(uid)}")
 
 
-    @property
-    def name(self) -> str:
-        return self._label
-
-    def set_name(self, label: str):
-        """
-        Set the name of the strategy.
-        :param label:
-        :return: nothing
-        """
-        self._label = label
-        log.success(f"Strategy name set to: {self._label}")
-
-
-class BaseAction(GameTheoryMechanic, ABC):
+class BaseAction(GameTheoryMechanic, ABC):  # TODO: add hooks to this class
     """
 
     """
@@ -195,22 +201,28 @@ class BaseAction(GameTheoryMechanic, ABC):
         super().__init__()
 
 
-class BaseInformation(GameTheoryMechanic, ABC):
-    """
 
+
+class BaseInformation(GameTheoryMechanic, ABC):  # TODO: add hooks to this class
+    """
+    TODO: Document BaseInformation class
     """
     @abstractmethod
     def __init__(self):
         super().__init__()
 
 
-class BaseTurn(GameTheoryMechanic, ABC):
+class BaseTurn(GameTheoryMechanic, ABC):  # TODO: add hooks to this class
     """
-
+    TODO: Document BaseTurn class
     """
 
     mechanic_name = 'turns'
+    mechanic_desc = ''  # TODO: Add description
 
     @abstractmethod
     def __init__(self):
         super().__init__()
+
+
+# TODO: Add a hook/extension implementation for custom mechanics abstract bases
