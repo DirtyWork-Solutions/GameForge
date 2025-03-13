@@ -101,9 +101,10 @@ class StrategyBuilder:
         """
         Check if the strategy is ready to be built.
 
-        :param hard_fail: bool - raise an appropriate exception if checks fail? **Default is False.**
+        :param hard_fail: *bool* - raise an appropriate exception if checks fail? **Default is False.**
 
-        :return: bool - True if the strategy is ready to be built, False otherwise. *Nothing is returned with hard_fail=True*.
+        :return: *bool* - **True** if the strategy is ready to be built, **False** otherwise. *Nothing* is returned with
+        *hard_fail=True*.
 
         :raises AssertionError: If the strategy is not ready to be built *and* hard_fail=True.
         """
@@ -131,6 +132,7 @@ class Strategy(BaseStrategy):
         log.error("Interface not implemented yet.")
 
 if __name__ == '__main__':
+    #
     plan = StrategyBuilder()
     ready = plan.check_build()
     print(ready)

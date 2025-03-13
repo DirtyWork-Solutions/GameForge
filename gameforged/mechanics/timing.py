@@ -38,5 +38,6 @@ if __name__ == '__main__':
     outcomes = list(game.validate_arrival(arrivals))
 
     for outcome in outcomes:
+        print()
         print(f"Player {outcome.player_id} waits {outcome.wait_time:.1f} minutes")
         print(f"Cab departs at 9:{30 + outcome.departure_time:.1f}")

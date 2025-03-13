@@ -29,7 +29,7 @@ It is especially useful for games with hidden roles or incomplete knowledge.
 from gameforged.mechanics.__bases__ import BaseInformation
 from gameforged.control_tower import Controller
 
-log = Controller.logger
+log = Controller().logger
 
 from typing import Dict, Any, Optional, Callable, List, Union
 
@@ -202,3 +202,4 @@ class MisinformationMechanic(BaseInformation):  # TODO: Create Misinformation cl
         distorted_value = value.copy()
         distorted_value["value"] = "distorted_" + str(value["value"])
         return distorted_value
+

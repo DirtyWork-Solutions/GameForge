@@ -28,7 +28,7 @@ from abc import ABC
 from gameforged.mechanics.__bases__ import BaseAgent
 from gameforged.control_tower import Controller
 
-log = Controller.logger
+log = Controller().logger
 
 class SimulatedAgent(BaseAgent):
     """
@@ -38,13 +38,20 @@ class SimulatedAgent(BaseAgent):
     """
     def __init__(self):
         super().__init__()
-        self.simulation_state = None
+        self._sim_state = None
         self._is_simulated = True
+
+    @property
+    def state(self):
+        """
+        Status/stage of simulation.
+        :return: (str) *start, stop, pause, etc.*
+        """
+        return self._sim_state
 
     @property
     def is_simulated(self) -> bool:
         return self._is_simulated
-
 
 
     def start_simulation(self):
@@ -53,16 +60,16 @@ class SimulatedAgent(BaseAgent):
 
     def pause_simulation(self):
         self.simulation_state = 'paused'
-        log.info("Simulation paused")
+        log.info("Simulation paused.")
 
     def stop_simulation(self):
         self.simulation_state = 'stopped'
-        log.info("Simulation stopped")
+        log.info("Simulation stopped.")
 
     def update_simulation(self):
         if self.simulation_state == 'running':
             # Update the simulation state here
-            log.info("Simulation updated")
+            log.info("Simulation updated.")
 
 class HumanPlayer(BaseAgent):
     """
