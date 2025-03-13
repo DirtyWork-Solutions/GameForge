@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 
-from pyutile.reporting.logged import log as log
+from gameforged.control_tower import Controller
 
+log = Controller.logger
 from gameforged.mechanics.__bases__ import BaseStrategy
 
 

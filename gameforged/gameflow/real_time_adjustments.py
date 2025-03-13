@@ -1,1 +1,3 @@
-from gameforged.control_tower import LOG as log
+from gameforged.control_tower import Controller
+
+log = Controller.logger

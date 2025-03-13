@@ -27,7 +27,9 @@ It is especially useful for games with hidden roles or incomplete knowledge.
 """
 
 from gameforged.mechanics.__bases__ import BaseInformation
-from gameforged.control_tower import LOG as log
+from gameforged.control_tower import Controller
+
+log = Controller.logger
 
 from typing import Dict, Any, Optional, Callable, List, Union
 

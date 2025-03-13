@@ -3,7 +3,7 @@
 
 """
 
-from pyutile.reporting.logged import log as LOG
+from bedrocked.reporting.reported import logger as LOG
 from gameforged.utilities.interfaces import Interfaces
 from gameforged.utilities.data_io import save_data, load_data
 from gameforged.errors import *
@@ -21,9 +21,12 @@ class Controller:  # TODO: Implement the controller class
     """
 
     """
-    def __init__(self):
-        self.interfaces = INTERFACES
-        LOG.warning("Controller functionality not implemented yet")
+    logger = LOG
+    interfaces = INTERFACES
+
+    @property
+    def toolbox(self):
+        return Toolbox()
 
 
 class Toolbox:  # TODO: Make a singleton class
@@ -32,7 +35,10 @@ class Toolbox:  # TODO: Make a singleton class
     """
 
     def __init__(self):
-        LOG.warning("Toolbox functionality not implemented yet")
-    pass
+        pass
+
+    @property
+    def controller(self):
+        return engine
 
 engine = Controller()

@@ -24,7 +24,9 @@ This module does not store player state — it purely "filters" decision inputs/
 from typing import Optional, Union, List, Dict, Any
 from enum import Enum
 import random
+from gameforged.control_tower import Controller
 
+logger = Controller().logger
 
 class BiasType(str, Enum):  # TODO: Add hook for custom biases
     """Enumeration of supported cognitive biases."""
@@ -136,6 +138,6 @@ class BiasInfluencer:
 
         return biased_action
 
-    # Optional future extension — needs input from game state
+    # TODO: needs input from game state -
     # def get_most_common_action(self, available_actions: List[str]) -> str:
     # return random.choice(available_actions)

@@ -2,10 +2,30 @@ from pyutile.reporting.logged import log as LOG
 
 # Dictionary of error codes and their descriptions
 ERR_CODE_DICT = {
-    0: "Unknown error",
-    1: "Invalid input",
-    2: "Invalid output",
-    3: "Invalid operation",
+    0: {"msg": "Unknown error",
+        "lvl": "error",
+        "logged": True,
+        "fatal": True,
+        "exception_classes": ["GameForgedException"]
+        },
+    1: {"msg": "Invalid Input",
+        "lvl": "error",
+        "logged": True,
+        "fatal": True,
+        "exception_classes": ["GameForgedException"]
+        },
+    2: {"msg": "Invalid Output",
+        "lvl": "error",
+        "logged": True,
+        "fatal": True,
+        "exception_classes": ["GameForgedException"]
+        },
+    3: {"msg": "Invalid operation",
+        "lvl": "error",
+        "logged": True,
+        "fatal": True,
+        "exception_classes": ["GameForgedException"]
+        },
     4: "Invalid state",
     5: "Invalid configuration",
     6: "Invalid request",
@@ -66,27 +86,161 @@ ERR_CODE_DICT = {
 }
 
 
+class ErrorHandler:
+    """
+    Error handler class for GameForged.
+    """
+    CODE = ERR_CODE_DICT
+
+
+class Error:
+    """
+
+    """
+
+    def __init__(self,
+                 code: int = None,
+                 message: str = None,
+                 output: str = None,
+                 log: bool = True,
+                 lvl: str = 'error',
+                 classes: list = None,
+                 fatal: bool = False):
+
+        self.fatal = fatal
+        self.classes = classes if classes else [GameForgedException]
+        self.code = code
+
+        #
+        if code is None or code <= 0 or code >= 999999:
+            self.code = 0
+        elif code and code in ErrorHandler().CODE.keys():
+            self.code = code
+        else:
+            self._code = 0
+
+        @property
+        def code(self):
+            return self._code
+
+        @property
+        def full_code(self):
+            return f"GF{self.code:}"
+
+        @code.setter
+        def code(self, value: int):
+            if value is None or value <= 0 or value >= 999999:
+                self._code = 0
+            elif value and value in ErrorHandler().CODE.keys():
+                self._code = value
+            else:
+                self._code = 0
+
+        @full_code.setter
+        def full_code(self, value: str | int):
+            try:
+                self._code = int(value)
+            except Exception as e:
+                self._code = 0
+
+        #
+        if message and message != '':
+            self.message = message
+        elif code in ERR_CODE_DICT.keys():
+            self.message = self.load_message_code(code)
+        else:
+            self.message = self.load_message_code(code)
+
+        #
+        self.logged = log
+        self.lvl = lvl.lower() if lvl.lower() in ['debug', 'info', 'warning', 'error', 'critical'] else 'error'
+
+
+
+    def load_message_code(self, code=0):
+        """
+
+        :param code:
+        :return:
+        """
+        print(code)
+        if code:
+            LOG.success(f"Loading error message for code: {code}")
+            self._code = code
+            self.message = ERR_CODE_DICT[self._code]
+        elif code and code in ErrorHandler().CODE.keys():
+            LOG.debug(f"Loading error message for code: {code}")
+            self.message = ERR_CODE_DICT[code]["msg"]
+        else:
+            self.message = ERR_CODE_DICT[code]["msg"]
+
+        return self.message
+
+    def raise_error(self):
+        """
+
+        """
+        if self.logged and self.is_fatal():
+            LOG.critical(f"[FATAL ERROR] {self.code}: {self.message}")
+        elif self.logged and self.lvl == 'error' and not self.is_fatal():
+            LOG.error(f"[ERROR] {self.code}: {self.message}")
+        elif self.logged and self.lvl == 'warning':
+            LOG.warning(f"[WARNING] {self.code}: {self.message}")
+        elif self.logged and self.lvl == 'info':
+            LOG.info(f"[INFO] {self.code}: {self.message}")
+        elif self.logged and self.lvl == 'success':
+            LOG.success(f"[SUCCESS] {self.code}: {self.message}")
+        elif self.logged and self.lvl == 'debug':
+            LOG.debug(f"[DEBUG] {self.code}: {self.message}")
+        else:
+            LOG.exception(f"[EXCEPTION] {self.code}: {self.message}")
+
+        if self.fatal:
+            # Check for multiple exception classes
+            if len(self.classes) > 1:
+                # Dynamically create a new exception class that inherits from the specified classes
+                exception_class = type('DynamicException', tuple(self.classes), {})
+                raise exception_class(self.message)
+            else:
+                raise self.classes[0](self.message, self.code)
+
+
+
+
+    def is_fatal(self):
+            """"""
+            if self.lvl in ['error', 'critical']:
+                return True
+            elif self.fatal:
+                return True
+            else:
+                return False
+
+
 class GameForgedException(Exception):
     """
     Base exception class for GameForged.
     """
 
-    def __init__(self, message: str, error_code: int = None, logged: bool = True, log_lvl: str = 'error'):
+    def __init__(self, message: str, error_code: int = None, logged: bool = False, lvl: str = 'error'):
         """
         Initialize the exception with a message and an optional error code.
 
         """
         super().__init__(message)
         # Set the error code if it is valid, otherwise default to 0
-        if error_code is None:
-            self.error_code = -1
+        if error_code is None and self.code is None:
+            self.code = -1
         else:
-            self.error_code = error_code
+            self.code = error_code
+        #
         if logged:
             if error_code is None or error_code == -1:
                 self.log_error(message)
             else:
                 self.log_error(message, error_code)
+
+            self.lvl = lvl if lvl.lower() in ['debug', 'info', 'warning', 'error', 'critical'] else 'error'
 
     def log_error(self, message: str, error_code: int = None, lvl: str = None):
         """
@@ -96,18 +250,19 @@ class GameForgedException(Exception):
         if lvl is None:
             lvl = 'error' if error_code else 'warning'
         #
-        if error_code == -1:
-            LOG.warning(f"Error {error_code}: {message}")
-        else:
-            LOG.warning(message)
+        if lvl.lower() in ['debug', 'info', 'warning', 'error', 'critical']:
+            LOG.log(lvl.upper(), f"[Error {error_code}] {message}")
 
     def __str__(self):
         """
         Return a string representation of the error, including the error code if available.
         """
-        if self.error_code:
-            return f"[Error {self.error_code}] {super().__str__()}"
+        if self.code:
+            return f"[Error {self.code}] {super().__str__()}"
         return super().__str__()
+
 
 class GameForgedError(GameForgedException):
     pass
+
+

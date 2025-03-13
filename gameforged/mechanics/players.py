@@ -26,8 +26,9 @@ and decision-making mechanisms. AI players can integrate with the strategies' mo
 from abc import ABC
 
 from gameforged.mechanics.__bases__ import BaseAgent
-from gameforged.control_tower import LOG as log
+from gameforged.control_tower import Controller
 
+log = Controller.logger
 
 class SimulatedAgent(BaseAgent):
     """
