@@ -26,14 +26,35 @@ class EconomicStrategyAdjuster(BaseStrategyAdjuster):
     """
     Implements adjustments for economic decisions.
     """
-    pass
+    def __init__(self, investment):
+        super().__init__()
+        self.investment = investment
+
+    def adjust(self, current_strategy, game_state) -> BaseStrategy:
+        # Example logic for adjusting economic strategy
+        new_strategy = current_strategy.clone()
+        if game_state.economic_conditions == "recession":
+            new_strategy.investment -= 10
+        elif game_state.economic_conditions == "boom":
+            new_strategy.investment += 10
+        log.debug(f"Economic strategy adjusted: {new_strategy}")
+        return new_strategy
 
 
 class PoliticalStrategyAdjuster(BaseStrategyAdjuster):
     """
     Adjusts strategies based on political shifts or regulatory changes.
     """
-    pass
+
+    def adjust(self, current_strategy, game_state) -> BaseStrategy:
+        # Example logic for adjusting political strategy
+        new_strategy = current_strategy.clone()
+        if game_state.political_climate == "unstable":
+            new_strategy.diplomacy -= 5
+        elif game_state.political_climate == "stable":
+            new_strategy.diplomacy += 5
+        log.debug(f"Political strategy adjusted: {new_strategy}")
+        return new_strategy
 
 
 class AdaptiveStrategyManager:

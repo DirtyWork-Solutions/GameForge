@@ -1,7 +1,7 @@
 """
 This module provides Base Classes for *all* **game theory** mechanics; such as *players* or *strategies*.
 """
-
+import copy
 from abc import ABC, abstractmethod
 from typing import Dict, Any
 from uuid import uuid4, UUID
@@ -187,6 +187,9 @@ class BaseStrategy(GameTheoryMechanic, ABC):  # TODO: document strategy base cla
     @property
     def strategy_id(self) -> UUID | str:
         return self._uid
+
+    def clone(self):
+        return copy.deepcopy(self)
 
 
 

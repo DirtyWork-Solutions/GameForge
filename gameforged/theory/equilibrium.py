@@ -5,7 +5,9 @@ tools for stability testing, dynamic equilibrium management, approximations, and
 packages such as numpy and scipy are used for numerical computations and optimization.
 """
 
-from gameforged.control_tower import log as logger
+from gameforged.control_tower import Controller
+
+logger = Controller().logger
 
 import numpy as np
 from abc import ABC, abstractmethod
@@ -25,6 +27,9 @@ class Game(BaseGame):
         payoff_matrix (np.array): 2D array representing the payoff matrix.
         players (list): List of players' names.
     """
+
+    def get_winner(self):
+        pass
 
     def __init__(self, payoff_matrix, players):
         super().__init__()
